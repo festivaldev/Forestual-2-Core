@@ -14,47 +14,25 @@
             TryChannelJoin,
             ChannelJoinResult,
             SetState,
-            SetFlags,
+            SetLuvaValues,
             ClearConversation,
             Disconnect,
             GetServerMetaData,
             GetAccountList,
             SetAccountList,
+            SetRankList,
             RegisterRecord,
             CreateChannel,
-            RemoveChannel,
+            CloseChannel,
             SetChannelList,
             SetChannel,
             Extension,
-            ExtensionTransport
-        }
-
-        public enum Flag
-        {
-            Wildcard,
-            None,
-            CanControlServer,
-            CanGlobalTalk,
-            CanHiddenTalk,
-            CanMuteUser,
-            CanDemuteUser,
-            CanBannUser,
-            CanBannUserPermanently,
-            CanDebannUser,
-            CanForce,
-            CanForceMultiple,
-            CanCreateChannel,
-            CanEditChannel,
-            CanVanish,
-            CanChangeIdentity,
-            CanCreateAccounts,
-            CanEditAccounts,
-            CanHyper,
-            CannotBeImitated,
-            CannotBeForced,
-            CannotBeEdited,
-            CannotBeMuted,
-            CannotBeBanned
+            ExtensionTransport,
+            GetAccountData,
+            SetAccountData,
+            SendLuvaNotice,
+            ShowLuvaNotice,
+            None
         }
 
         public enum MessageType

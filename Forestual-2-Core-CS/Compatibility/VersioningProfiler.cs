@@ -20,15 +20,19 @@ namespace F2Core.Compatibility
         };
 
         public static Version Parse(string input) {
-            if (!Regex.IsMatch(input, "(-?[0-9]+)\\.(-?[0-9]+)\\.([0-9]+)([a-zA-Z]*) \\[([a-zA-Z0-9]{7})\\]( @([0-9]{2}w[0-9]{1,2}))?")) {
+            if (!Regex.IsMatch(input, "(-?[0-9]+)\\.(-?[0-9]+)\\.([0-9]+)(|-snapshot|-alpha|-beta|-rc) \\[([a-zA-Z0-9]{7})\\]( @([0-9]{2}w[0-9]{1,2}))?", RegexOptions.IgnoreCase)) {
                 throw new FormatException();
             }
-            var Match = Regex.Match(input, "(-?[0-9]+)\\.(-?[0-9]+)\\.([0-9]+)([a-zA-Z]*) \\[([a-zA-Z0-9]{7})\\]( @([0-9]{2}w[0-9]{1,2}))?");
+            var Match = Regex.Match(input, "(-?[0-9]+)\\.(-?[0-9]+)\\.([0-9]+)(|-snapshot|-alpha|-beta|-rc) \\[([a-zA-Z0-9]{7})\\]( @([0-9]{2}w[0-9]{1,2}))?", RegexOptions.IgnoreCase);
+
+            var Suffix = Match.Groups[4].Value;
+            Suffix = Suffix == "" ? "none" : Suffix.Remove(0, 1);
+
             var Version = new Version {
                 Major = int.Parse(Match.Groups[1].Value),
                 Minor = int.Parse(Match.Groups[2].Value),
                 Patch = int.Parse(Match.Groups[3].Value),
-                Suffix = Match.Groups[4].Value,
+                Suffix = (Suffixes) Enum.Parse(typeof(Suffixes), Suffix.ToLower()),
                 Commit = Match.Groups[5].Value,
                 ReleaseDate = Match.Groups[7].Value
             };
@@ -39,27 +43,11 @@ namespace F2Core.Compatibility
             return version.GreaterThan(Parse(rangeVersion.SupportedVersion));
         }
 
-        //public static bool LessThan(this Version left, Version right) {
-        //    if (right.ToShortString() == Highest.ToShortString()) {
-        //        return true;
-        //    }
-        //    if (left.ToShortString() == right.ToShortString()) {
-        //        return true;
-        //    }
-        //    if (left.Major < right.Major) {
-        //        return true;
-        //    }
-        //    if (left.Major == right.Major && left.Minor < right.Minor) {
-        //        return true;
-        //    }
-        //    return left.Major == right.Major && left.Minor == right.Minor && left.Patch < right.Patch;
-        //}
-
         public static bool GreaterThan(this Version left, Version right) {
             if (right.ToShortString() == Lowest.ToShortString()) {
                 return true;
             }
-            if (left.ToShortString() == right.ToShortString()) {
+            if (left.ToMediumString() == right.ToMediumString()) {
                 return true;
             }
             if (left.Major > right.Major) {
@@ -68,7 +56,19 @@ namespace F2Core.Compatibility
             if (left.Major == right.Major && left.Minor > right.Minor) {
                 return true;
             }
-            return left.Major == right.Major && left.Minor == right.Minor && left.Patch > right.Patch;
+            if (left.Major == right.Major && left.Minor == right.Minor && left.Patch > right.Patch) {
+                return true;
+            }
+            return left.Major == right.Major && left.Minor == right.Minor && left.Patch == right.Patch && left.Suffix > right.Suffix;
+        }
+
+        public enum Suffixes
+        {
+            snapshot,
+            alpha,
+            beta,
+            rc,
+            none
         }
     }
 }

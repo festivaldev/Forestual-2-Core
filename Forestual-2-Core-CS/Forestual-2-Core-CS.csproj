@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Forestual-2-Core-CS.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,18 +52,17 @@
     <Compile Include="DiscardableConnection.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Event.cs" />
-    <Compile Include="Extension\ControlSerializer.cs" />
     <Compile Include="Extension\IExtension.cs" />
     <Compile Include="Extension\Listener.cs" />
-    <Compile Include="Management\ClientManagement.cs" />
-    <Compile Include="Management\IClient.cs" />
-    <Compile Include="Management\IServer.cs" />
-    <Compile Include="Management\ServerManagement.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="Extension\ExtensionPool.cs" />
+    <Compile Include="Extension\IClient.cs" />
+    <Compile Include="Extension\IServer.cs" />
+    <Compile Include="MessagePacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Punishment.cs" />
     <Compile Include="Rank.cs" />
     <Compile Include="ServerMetaData.cs" />
+    <Compile Include="Severity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
