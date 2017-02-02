@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿#pragma warning disable 1591
+
+using System.Windows.Forms;
 
 namespace F2Core.Extension
 {

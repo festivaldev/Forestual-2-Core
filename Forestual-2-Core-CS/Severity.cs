@@ -1,9 +1,6 @@
-﻿using System;
+﻿#pragma warning disable 1591
+
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace F2Core
 {

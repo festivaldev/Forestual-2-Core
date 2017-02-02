@@ -1,4 +1,6 @@
-﻿namespace F2Core.Extension
+﻿#pragma warning disable 1591
+
+namespace F2Core.Extension
 {
     public class ExtensionPool
     {

@@ -1,4 +1,6 @@
-﻿namespace F2Core
+﻿#pragma warning disable 1591
+
+namespace F2Core
 {
     public class Enumerations
     {

@@ -1,4 +1,6 @@
-﻿using F2Core.Compatibility;
+﻿#pragma warning disable 1591
+
+using F2Core.Compatibility;
 
 namespace F2Core
 {
